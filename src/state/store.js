@@ -22,3 +22,5 @@ export const store = configureStore({
 store.dispatch(songSlice.actions.addSong("Despacito"));
 
 console.log(store.getState());
+
+export const { addSong } = songSlice.actions;
