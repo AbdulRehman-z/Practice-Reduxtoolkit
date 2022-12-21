@@ -5,7 +5,16 @@ import SongPlaylist from "./components/songComponent";
 
 import { Button } from "@mui/material";
 import RestartAltOutlined from "@mui/icons-material/RestartAltOutlined";
+import { useDispatch, useSelector } from "react-redux";
+import { reset } from "./state/store.js";
+
 function App() {
+  const dispatch = useDispatch();
+
+  const handleReset = () => {
+    return dispatch(reset());
+  };
+
   return (
     <>
       <CssBaseline />
@@ -23,6 +32,7 @@ function App() {
         maxWidth="xl"
       >
         <Button
+          onClick={() => handleReset()}
           variant="contained"
           color="warning"
           startIcon={<RestartAltOutlined />}

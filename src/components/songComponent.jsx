@@ -3,18 +3,21 @@ import Box from "@mui/material/Box";
 import AddIcon from "@mui/icons-material/Add";
 import { createRandomSong } from "../data/fakeData.js";
 import { useDispatch, useSelector } from "react-redux";
-import { addSong } from "../state/store.js";
+import { addSong, removeSong } from "../state/store.js";
 import { DeleteOutline } from "@mui/icons-material";
 
 const SongPlaylist = () => {
   const dispatch = useDispatch();
   const songPlaylist = useSelector((state) => {
-    console.log(state);
-    return state.song;
+    return state.songs;
   });
 
   const handleAddSong = (song) => {
     return dispatch(addSong(song));
+  };
+
+  const handleRemoveSong = (song) => {
+    return dispatch(removeSong(song));
   };
 
   return (
@@ -39,7 +42,7 @@ const SongPlaylist = () => {
           variant="contained"
           color="primary"
           startIcon={<AddIcon />}
-          onClick={() => handleAddSong(createRandomSong)}
+          onClick={() => handleAddSong(createRandomSong())}
         >
           Add item
         </Button>
@@ -60,6 +63,7 @@ const SongPlaylist = () => {
             >
               <Typography variant="h6">{song}</Typography>
               <Button
+                onClick={() => handleRemoveSong(song)}
                 variant="contained"
                 color="error"
                 startIcon={<DeleteOutline />}

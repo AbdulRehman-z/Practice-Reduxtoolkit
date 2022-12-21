@@ -1,26 +1,13 @@
-import { configureStore, createSlice } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
+import { reset } from "./actions/action";
+import { addMovie, removeMovie, movieReducer } from "./reducers/movie.reducer";
+import { addSong, removeSong, songReducer } from "./reducers/song.reducer";
 
-export const songSlice = createSlice({
-  name: "song",
-  initialState: [],
-  reducers: {
-    addSong: (state, action) => {
-      state.push(action.payload);
-    },
-    removeSong: (state, action) => {
-      // state.splice(action.payload, 1);
-    },
-  },
-});
-
-export const store = configureStore({
+const store = configureStore({
   reducer: {
-    song: songSlice.reducer,
+    songs: songReducer,
+    movies: movieReducer,
   },
 });
 
-store.dispatch(songSlice.actions.addSong("Despacito"));
-
-console.log(store.getState());
-
-export const { addSong } = songSlice.actions;
+export { store, addMovie, removeMovie, addSong, removeSong, reset };
